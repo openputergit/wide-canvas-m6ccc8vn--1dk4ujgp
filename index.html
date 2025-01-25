@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Request</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #fce7f3;
+        }
+        .neubrutalism {
+            border: 3px solid #000;
+            box-shadow: 4px 4px 0 #000;
+            transition: all 0.2s ease;
+        }
+        .neubrutalism:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 8px 8px 0 #000;
+        }
+        .neubrutalism:active {
+            transform: translate(0px, 0px);
+            box-shadow: 2px 2px 0 #000;
+        }
+        #no-btn {
+            position: absolute;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="text-center px-4">
+        <h1 class="text-4xl md:text-6xl font-bold mb-12 neubrutalism bg-white p-8 inline-block">
+            Will you be Vishal Kalita's Valentine? 💝
+        </h1>
+        <div class="flex flex-col md:flex-row gap-6 justify-center items-center mt-8 relative">
+            <button id="yes-btn" class="neubrutalism bg-pink-400 px-12 py-4 text-xl font-bold">
+                Yes ❤️
+            </button>
+            <button id="no-btn" class="neubrutalism bg-gray-200 px-12 py-4 text-xl font-bold">
+                No 💔
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        
+        // Function to get random position
+        function getRandomPosition() {
+            const viewportWidth = window.innerWidth - 100;
+            const viewportHeight = window.innerHeight - 100;
+            const randomX = Math.floor(Math.random() * viewportWidth);
+            const randomY = Math.floor(Math.random() * viewportHeight);
+            return { x: randomX, y: randomY };
+        }
+
+        // Move "No" button when hovered
+        noBtn.addEventListener('mouseover', () => {
+            const newPosition = getRandomPosition();
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = newPosition.x + 'px';
+            noBtn.style.top = newPosition.y + 'px';
+        });
+
+        // Handle "Yes" button click
+        yesBtn.addEventListener('click', () => {
+            document.body.innerHTML = `
+                <div class="min-h-screen flex items-center justify-center text-center px-4">
+                    <div class="neubrutalism bg-pink-400 p-12">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-6">Thanks! ❤️</h1>
+                        <p class="text-xl">Looking forward to spending Valentine's Day with you!</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Handle "No" button click (though it's practically impossible to click)
+        noBtn.addEventListener('click', () => {
+            document.body.innerHTML = `
+                <div class="min-h-screen flex items-center justify-center text-center px-4">
+                    <div class="neubrutalism bg-pink-400 p-12">
+                        <h1 class="text-4xl md:text-6xl font-bold mb-6">Thanks for saying Yes! ❤️</h1>
+                        <p class="text-xl">I knew you couldn't resist! 😊</p>
+                    </div>
+                </div>
+            `;
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
